@@ -1,73 +1,57 @@
-# JD Lib
-My custom-made library for notifications in FiveM, I am still adding to this project, so don't expect a lot at the moment.
+# jd_lib
 
-## **Open Source, but do not re-publish or sell**
+A lightweight utility library and resource for FiveM development containing helpful client scripts, modules, addons, and a custom notification system.
 
 ---
 
-## Using jd_lib as a Dependency
+## Project Structure
 
-### 1. Declare the dependency in your resource's `fxmanifest.lua`
-```lua
-dependencies {
-    'jd_lib',
-}
+* `fxmanifest.luaux`: Resource manifest file configuring scripts and metadata.
+* `shared/`: Shared code and core library functions.
+* `client/`: Core client-side scripts and user editors.
+* `modules/`: Reusable components (features a fully styled HTML/JS notification system).
+* `addons/`: Optional gameplay mechanics and features.
+
+---
+
+## Installation
+
+1. Download or clone this repository into your FiveM server's resources directory.
+2. Add the following line to your `server.cfg`:
+
+```cfg
+ensure jd_lib
 ```
-FiveM will ensure `jd_lib` starts before your resource.
 
-### 2. Import the lib table at the top of your client script
+---
+
+## Example Usage
+
+### 1. Using Shared Library Functions
+Access shared utilities across your resources using the core exports:
 
 ```lua
-local lib = exports['jd_lib']:getLib()
+local lib = exports['jd_lib']:GetLib()
 ```
 
-### 3. Use it
+### 2. Triggering Notifications
+Trigger custom alerts using the built-in HTML/JS notification module:
+
 ```lua
-lib.notify({
-    title       = 'Hello',
-    description = 'jd_lib is working!',
-    type        = 'success',
-    duration    = 4000,
+exports['jd_lib']:Notify({
+    title = "System",
+    message = "This is a notification test!",
+    type = "success" -- Options: success, error, info
 })
 ```
 
----
-
-## Notification Parameters
-
-```
-lib.notify(options)
-
-@param options.title       string  – Notification title
-@param options.description string  – Body text (optional)
-@param options.type        string  – 'success' | 'error' | 'warning' | 'info'
-@param options.duration    number  – Duration in ms (default 4000)
-@param options.position    string  – 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' (default 'top-right')
-```
-
-### Examples
-
-```lua
--- Success
-lib.notify({ title = 'Saved', description = 'Data was saved.', type = 'success', position = 'top-center' })
-
-
--- Error
-lib.notify({ title = 'Saved', description = 'Data was saved.', type = 'error', position = 'top-center' })
-
--- Warning
-lib.notify({ title = 'Saved', description = 'Data was saved.', type = 'warning', position = 'top-center' })
-
--- Info
-lib.notify({ title = 'Saved', description = 'Data was saved.', type = 'info', position = 'top-center' })
-```
-
-### New possitions available for the notifications (add to bottom of you notify under duration in the provided format)
-```lua
-possition = 'top-left',
-possition = 'top-right', (deafult)
-possition = 'top-center',
-```
+### 3. Addons Overview
+The `addons/` folder contains optional plugins that enhance gameplay:
+* **Death Script (`death-script.luaux`)**: Manages custom death-related states and events.
+* **Gunpowder Smell (`gunpowder-smell.luaux`)**: Adds residue tracking and mechanics after firing weapons.
+* **Stress Driving (`stress-driving.luaux`)**: Introduces immersive driving stress mechanics.
 
 ---
-v1.1 — 17/04/2026 (release date)
+
+## 🛠️ Requirements & Compatibility
+* **Platform**: FiveM (Lua / Luaux)
