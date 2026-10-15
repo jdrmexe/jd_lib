@@ -2,10 +2,7 @@ fx_version 'cerulean'
 game { 'gta5' }
 
 name        'jd_lib'
-author      'JD'
-description 'JD Library'
-version     '1.0.0'
-
+author      'JD Development & Designs'
 -- Allows other resources to list `dependencies { 'jd_lib' }` in their
 -- own fxmanifest.lua and FiveM will ensure jd_lib starts first.
 provide 'jd_lib'
