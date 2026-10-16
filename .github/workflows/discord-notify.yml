@@ -1,39 +1,20 @@
 
-name: Github API
+name: Discord Webhook Notifications
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  api:
-    name: Build API
+  notify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Add your API setup, install, test, and build
-      # commands here, or replace this with your
-      # existing API build steps.
-
-      - name: Notify Discord
-        if: always()
+      - name: Send Discord Notification
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          title: "API Workflow Status"
-          description: |
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref_name }}
-            Event: ${{ github.event_name }}
-            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          color: 0x5865F2
+          title: "GitHub Notification"
+          description: "A new update was pushed to ${{ github.repository }}"
           username: GitHub Actions
