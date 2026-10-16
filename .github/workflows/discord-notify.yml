@@ -12,9 +12,28 @@ jobs:
     steps:
       - name: Send Discord Notification
         uses: sarisia/actions-status-discord@v1
+        if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          title: "GitHub Notification"
-          description: "A new update was pushed to ${{ github.repository }}"
-          username: GitHub Actions
+          title: "GitHub Actions CI"
+          url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          username: "actions-testrun"
+          description: |
+            **Repository**
+            [${{ github.repository }}](${{ github.server_url }}/${{ github.repository }})
+
+            **Branch / Ref**
+            `${{ github.ref_name }}`
+
+            **Event**
+            `${{ github.event_name }}`
+
+            **Commit**
+            `${{ github.sha }}`
+
+            **Triggered by**
+            `${{ github.actor }}`
+
+            **Workflow**
+            [View workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
