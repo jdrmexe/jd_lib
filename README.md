@@ -2,7 +2,7 @@
 
 A lightweight utility library for FiveM with a clean, flat notification system and a few optional gameplay add-ons.
 
-Fully Standalone. No ESX / QBCore needed.
+Standalone. No ESX / QBCore needed.
 
 ---
 
